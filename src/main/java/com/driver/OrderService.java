@@ -56,8 +56,13 @@ public class OrderService {
     }
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId){
-        return orderRepository.findOrdersLeftAfterGivenTimeByPartnerId(time, partnerId);
-    }
+    String[] parts = time.split(":");
+    int hours = Integer.parseInt(parts[0]);
+    int minutes = Integer.parseInt(parts[1]);
+    int deliveryTime = hours * 60 + minutes;
+    return orderRepository.findOrdersLeftAfterGivenTimeByPartnerId(deliveryTime, partnerId);
+}
+
 
     public String getLastDeliveryTimeByPartnerId(String partnerId){
         return orderRepository.findLastDeliveryTimeByPartnerId(partnerId);
