@@ -1,3 +1,4 @@
+
 package com.driver;
 
 import java.util.*;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderService {
 
-    @Autowired
+
     OrderRepository orderRepository = new OrderRepository();
 
     public void addOrder(Order order){
@@ -56,13 +57,8 @@ public class OrderService {
     }
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId){
-    String[] parts = time.split(":");
-    int hours = Integer.parseInt(parts[0]);
-    int minutes = Integer.parseInt(parts[1]);
-    int deliveryTime = hours * 60 + minutes;
-    return orderRepository.findOrdersLeftAfterGivenTimeByPartnerId(deliveryTime, partnerId);
-}
-
+        return orderRepository.findOrdersLeftAfterGivenTimeByPartnerId(time, partnerId);
+    }
 
     public String getLastDeliveryTimeByPartnerId(String partnerId){
         return orderRepository.findLastDeliveryTimeByPartnerId(partnerId);
